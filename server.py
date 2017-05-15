@@ -14,6 +14,8 @@ def hello_world():
 
 if __name__ == '__main__':
     tc = TcpConn()
-    value = tc.get(name)
+    value = tc.get(names[0])
+    print value
+    
     app.run()
 

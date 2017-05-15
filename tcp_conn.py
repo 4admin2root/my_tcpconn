@@ -7,8 +7,8 @@ from config import INTERVAL
 
 class TcpConn(object):
     def __init__(self):
-        self.__conn = redis.Redis(host=REDIS_HOST,port=REDIS_PORT) #todo config file
+        self.pool = redis.ConnectionPool(host=REDIS_HOST,port=REDIS_PORT)
+        self.r = redis.Redis(connection_pool = self.pool)
         self.ex = INTERVAL # expire time s
-
     def get(self,tname):
         return self.r.get(tname)
