@@ -16,7 +16,8 @@ api = Api(app)
 # values = [127,]
 tcp_conn = {
     'tcp_conn_key': fields.String,
-    # 'tcp_conn_value': fields.Integer
+    # 'tcp_conn_value': fields.Integer,
+    # 'interval': fields.Interger,default value
 }
 
 
@@ -33,6 +34,8 @@ class TcpConnListAPI(Resource):
                                    location='json')
         self.reqparse.add_argument('tcp_conn_value', type=int, default=0,
                                    location='json')
+        self.reqparse.add_argument('tcp_conn_interval', type=int, default=60,
+                                   location='json')
         super(TcpConnListAPI, self).__init__()
 
     def get(self):
@@ -41,7 +44,7 @@ class TcpConnListAPI(Resource):
 
     def post(self):
         args = self.reqparse.parse_args()
-        self.r.set(args['tcp_conn_key'],args['tcp_conn_value'])
+        self.r.set(args['tcp_conn_key'], args['tcp_conn_value'], args['tcp_conn_interval'])
         return {'ok': True}, 201
 
 
