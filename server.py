@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
-from flask import Flask, jsonify, abort, make_response
+from flask import Flask, jsonify, abort, make_response,render_template
 from tcp_conn import TcpConn
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
@@ -51,7 +51,7 @@ def hello_world():
 
 @app.route('/test')
 def netjson():
-    return render_template('topo.html', name=name)
+    return render_template('topo.html')
 
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
 
