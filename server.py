@@ -37,7 +37,7 @@ class TcpConnListAPI(Resource):
 
     def get(self):
         tclist = self.r.keys('tc*')
-        return {'tcp_conn_list': [marshal(tc, tcp_conn) for tc in tclist]}
+        return {'tcp_conn_list': tclist }
 
     def post(self):
         args = self.reqparse.parse_args()
@@ -48,6 +48,10 @@ class TcpConnListAPI(Resource):
 @app.route('/')
 def hello_world():
     return 'xxx'
+
+@app.route('/test')
+def netjson():
+    return render_template('topo.html', name=name)
 
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
 
