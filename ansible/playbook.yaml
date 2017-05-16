@@ -1,10 +1,24 @@
-set -ex
-wget https://github.com/4admin2root/my_tcpconn/archive/master.zip
-yum install python-pip python-devel unzip gcc -y
-unzip master.zip
-cd my_tcpconn-master
-pip install pip --upgrade
-pip install psutil
+---
+- hosts: my_tcpconn
+  vars:
+    server_port: 5000
+    server_host: 10.9.5.10
+  remote_user: root
+  tasks:
+  - name: ensure python-pip python-devel unzip is present
+    yum: name={{item}} state=present
+    with_items:
+      - python-pip
+      - python-devel
+      - unzip
+  - name: unzip file
+    unarchive: src=https://github.com/4admin2root/my_tcpconn/archive/master.zip dest=/opt/ copy=no
+  - name: install psutil
+    pip: name=psutil extra_args='-i https://mirrors.aliyun.com/pypi/simple/'
 
-#redis 10.9.100.18
-#server
+  - name: change config file
+    shell: sed -i '/SERVER/d' /opt/my_tcpconn-master/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn-master/config.py
+
+  - name: run a test
+    shell: python /opt/my_tcpconn-master/client.py
+

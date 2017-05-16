@@ -20,11 +20,10 @@ ltor = []
 rtol = []
 
 def postdata(cr):
-    url = url = 'http://'+ SERVER_HOST + ':' +  str(SERVER_PORT) + '/tc/api/v1.0/tclist'
+    url = url = 'http://' + SERVER_HOST + ':' + str(SERVER_PORT) + '/tc/api/v1.0/tclist'
     headers = {'content-type': 'application/json'}
     for i in cr:
         payload = {'tcp_conn_key': i, 'tcp_conn_value': cr[i], 'tcp_conn_interval': INTERVAL}
-        print payload
         rp = requests.post(url, data=json.dumps(payload), headers=headers)  # todo :1 .try  2. bad perf
 
 
