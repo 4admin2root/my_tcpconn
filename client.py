@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
-import requests, json, redis
+import requests, json
 from config import SERVER_HOST
 from config import SERVER_PORT
 from config import INTERVAL
