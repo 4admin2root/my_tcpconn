@@ -32,7 +32,7 @@ def getlist():
     tcs = psutil.net_connections('tcp4')
     for i in tcs :
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
-            lports.append(i.laddr[1])  # todo : how to handle same port and diff nic
+            lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
     for i in tcs :
         if i.status == 'ESTABLISHED' and i.laddr[0] != '127.0.0.1':
             if i.laddr[1] in lports:

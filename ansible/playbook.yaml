@@ -1,0 +1,10 @@
+set -ex
+wget https://github.com/4admin2root/my_tcpconn/archive/master.zip
+yum install python-pip python-devel unzip gcc -y
+unzip master.zip
+cd my_tcpconn-master
+pip install pip --upgrade
+pip install psutil
+
+#redis 10.9.100.18
+#server
