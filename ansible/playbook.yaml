@@ -14,7 +14,8 @@
       - unzip
       - gcc
   - name: unzip file
-    unarchive: src=https://github.com/4admin2root/my_tcpconn/archive/master.zip dest=/opt/ copy=no
+    unarchive: src=master.zip dest=/opt/
+
   - name: install psutil
     pip: name=psutil extra_args='-i https://mirrors.aliyun.com/pypi/simple/'
 
