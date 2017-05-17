@@ -11,6 +11,7 @@
       - python-pip
       - python-devel
       - unzip
+      - gcc
   - name: unzip file
     unarchive: src=https://github.com/4admin2root/my_tcpconn/archive/master.zip dest=/opt/ copy=no
   - name: install psutil
@@ -21,4 +22,6 @@
 
   - name: run a test
     shell: python /opt/my_tcpconn-master/client.py
+    tags:
+      - test
 

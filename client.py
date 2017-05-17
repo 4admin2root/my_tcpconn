@@ -29,15 +29,16 @@ def postdata(cr):
 
 def getlist():
     tcs = psutil.net_connections('tcp4')
-    for i in tcs :
+    for i in tcs:
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
             lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
-    for i in tcs :
+    for i in tcs:
         if i.status == 'ESTABLISHED' and i.laddr[0] != '127.0.0.1':
             if i.laddr[1] in lports:
                 rtol.append('tc' + '_' + i.raddr[0] + '_' + i.laddr[0] + '_' + str(i.laddr[1]))
-            else:
+            elif i.raddr[0] != SERVER_HOST and (i.raddr[1] not in [SERVER_PORT, 22]):
                 ltor.append('tc' + '_' + i.laddr[0] + '_' + i.raddr[0] + '_' + str(i.raddr[1]))
+
 
 if __name__ == '__main__':
     getlist()
