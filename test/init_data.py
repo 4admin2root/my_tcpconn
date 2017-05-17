@@ -15,7 +15,7 @@ pipe = conn.pipeline()
 
 if __name__ == '__main__':
 
-    while i < 1000:
+    while i < 100:
         ip = 'tc' + str(random.randint(192,255)) + '.' + \
               str(random.randint(168,255)) + '.' + \
               str(random.randint(0,255)) + '.' + \

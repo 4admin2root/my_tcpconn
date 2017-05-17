@@ -22,7 +22,6 @@ tcp_conn = {
 
 class TcpConnListAPI(Resource):
 
-
     def __init__(self):
         self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT)
         self.r = redis.Redis(connection_pool=self.pool)
@@ -31,7 +30,7 @@ class TcpConnListAPI(Resource):
         self.reqparse.add_argument('tcp_conn_key', type=str, required=True,
                                    help='No task title provided',
                                    location='json')
-        self.reqparse.add_argument('tcp_conn_value', type=int, default=0,
+        self.reqparse.add_argument('tcp_conn_value', type=int, required=True,
                                    location='json')
         self.reqparse.add_argument('tcp_conn_interval', type=int, default=60,
                                    location='json')

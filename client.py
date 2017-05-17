@@ -5,6 +5,11 @@ from config import SERVER_HOST
 from config import SERVER_PORT
 from config import INTERVAL
 from collections import Counter
+import logging
+import logging.config
+from requests import RequestException
+
+
 
 import psutil
 #todo
@@ -24,7 +29,11 @@ def postdata(cr):
     headers = {'content-type': 'application/json'}
     for i in cr:
         payload = {'tcp_conn_key': i, 'tcp_conn_value': cr[i], 'tcp_conn_interval': INTERVAL}
-        rp = requests.post(url, data=json.dumps(payload), headers=headers)  # todo :1 .try  2. bad perf
+        try:
+            requests.post(url, data=json.dumps(payload), headers=headers, timeout=3)  # todo :  bad perf
+        except RequestException as re:
+            print "Post data failed: {0}".format(re)
+            exit(1)
 
 
 def getlist():
@@ -41,12 +50,15 @@ def getlist():
 
 
 if __name__ == '__main__':
+    logging.config.fileConfig('logging.conf')
+    logger = logging.getLogger('example02')
     getlist()
     ltor_counter = Counter(ltor)
     rtol_counter = Counter(rtol)
+    logging.debug('start to post data to server')
     postdata(ltor_counter)
     postdata(rtol_counter)
-
+    logging.info('finished')
 
 
 
