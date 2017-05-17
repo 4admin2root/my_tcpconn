@@ -4,6 +4,7 @@
     server_port: 5000
     server_host: 10.9.5.10
   remote_user: root
+  gather_facts: no
   tasks:
   - name: ensure python-pip python-devel unzip is present
     yum: name={{item}} state=present

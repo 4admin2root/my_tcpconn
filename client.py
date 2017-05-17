@@ -34,9 +34,9 @@ def getlist():
             lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
     for i in tcs:
         if i.status == 'ESTABLISHED' and i.laddr[0] != '127.0.0.1':
-            if i.laddr[1] in lports:
+            if i.laddr[1] in lports and i.raddr[0] != SERVER_HOST and i.raddr[1] != 22:
                 rtol.append('tc' + '_' + i.raddr[0] + '_' + i.laddr[0] + '_' + str(i.laddr[1]))
-            elif i.raddr[0] != SERVER_HOST and (i.raddr[1] not in [SERVER_PORT, 22]):
+            elif i.raddr[0] != SERVER_HOST and i.raddr[1] != SERVER_PORT:
                 ltor.append('tc' + '_' + i.laddr[0] + '_' + i.raddr[0] + '_' + str(i.raddr[1]))
 
 
