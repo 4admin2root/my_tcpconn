@@ -1,6 +1,21 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
-import requests, json
+# -*- coding:utf-8 -*-
+
+"""
+my_tcpconn  client
+~~~~~~~~~~~~~~~~~~~~~
+@time: 2017/5/18 15:49
+@contact: piml.lui@gmail.com
+usage:
+python client.py
+
+links:
+
+:copyright: 4admin2root
+:license: BSD 3-Clause License
+"""
+import requests
+import json
 from config import SERVER_HOST
 from config import SERVER_PORT
 from config import INTERVAL
@@ -8,23 +23,26 @@ from collections import Counter
 import logging
 import logging.config
 from requests import RequestException
-
-
-
 import psutil
+
+__title__ = 'client'
+__version__ = '0.0.1'
+__author__ = 'adminroot'
+__license__ = 'BSD 3-Clause License'
+
+
+
 #todo
-#rest api post
-#ignore 127.0.0.1
-#set interval
-#daemon
-# windows and linux
-# just ipv4
-# timeout and retry
-lports = []
-ltor = []
-rtol = []
+# daemon and windows service
+# loggind
+#
+lports = []  # listen ports
+ltor = []    # local to remote links
+rtol = []    # remote to local links
+
 
 def postdata(cr):
+    """post links to http server"""
     url = url = 'http://' + SERVER_HOST + ':' + str(SERVER_PORT) + '/tc/api/v1.0/tclist'
     headers = {'content-type': 'application/json'}
     for i in cr:
@@ -32,11 +50,14 @@ def postdata(cr):
         try:
             requests.post(url, data=json.dumps(payload), headers=headers, timeout=3)  # todo :  bad perf
         except RequestException as re:
-            print "Post data failed: {0}".format(re)
+            logging.error("Post data failed: {0}".format(re))
+            logging.debug('SERVER_HOST:' + SERVER_HOST)
+            logging.debug('SERVER_PORT:' + str(SERVER_PORT))
             exit(1)
 
 
 def getlist():
+    """ get tcp4 network links """
     tcs = psutil.net_connections('tcp4')
     for i in tcs:
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':

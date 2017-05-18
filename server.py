@@ -1,13 +1,33 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
-from flask import Flask, jsonify, abort, make_response,render_template
-from flask_restful import Api, Resource, reqparse, fields, marshal_with
+# -*- coding:utf-8 -*-
+"""
+my_tcpconn  test
+~~~~~~~~~~~~~~~~~~~~~
+@time: 2017/5/18 15:49
+@contact: piml.lui@gmail.com
+usage:
+python server.py
+
+links:
+
+:copyright: 
+:license: BSD 3-Clause License
+"""
+
+from flask import Flask, render_template
+from flask_restful import Api, Resource, reqparse, fields
 import json
 
 import redis
 from config import REDIS_HOST
 from config import REDIS_PORT
 from config import INTERVAL
+
+__title__ = 'server'
+__version__ = '0.0.1'
+__author__ = 'adminroot'
+__license__ = 'BSD 3-Clause License'
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -21,8 +41,9 @@ tcp_conn = {
 
 
 class TcpConnListAPI(Resource):
-
+    """restful api"""
     def __init__(self):
+        """init redis connection and reqparse"""
         self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT)
         self.r = redis.Redis(connection_pool=self.pool)
         self.ex = INTERVAL  # expire time s
@@ -37,10 +58,12 @@ class TcpConnListAPI(Resource):
         super(TcpConnListAPI, self).__init__()
 
     def get(self):
+        """ get method"""
         tclist = self.r.keys('tc*')
         return {'tcp_conn_list': tclist}
 
     def post(self):
+        """ post method """
         args = self.reqparse.parse_args()
         self.r.set(args['tcp_conn_key'], args['tcp_conn_value'], args['tcp_conn_interval'])  # todo try exception
         return {'ok': True}, 201
@@ -60,8 +83,8 @@ def getjson():
     # pass  # todo : return formatted json data
     tcl = TcpConnListAPI().get()['tcp_conn_list']
     d_netjson = {'type': 'test', 'label': 'test', 'protocol': 'tcp', 'version': '0.0.1', 'metric': 'test', 'nodes': [], 'links': [] }
-    nodes = []
-    links = []
+    nodes = []  # netjsongraph node list
+    links = []  # netjsongraph link list
     for i in tcl:
         link = i.split('_')
         l1 = {'id': link[1]}
@@ -81,4 +104,4 @@ def getjson():
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')
