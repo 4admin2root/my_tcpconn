@@ -34,7 +34,8 @@ __license__ = 'BSD 3-Clause License'
 
 #todo
 # daemon and windows service
-# loggind
+# logging
+# logging config file
 #
 lports = []  # listen ports
 ltor = []    # local to remote links

@@ -23,7 +23,7 @@
     shell: sed -i '/SERVER/d' /opt/my_tcpconn-master/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn-master/config.py
 
   - name: run a test
-    shell: python /opt/my_tcpconn-master/client.py
+    shell: cd /opt/my_tcpconn-master/; python client.py
     tags:
       - test
 
