@@ -1,0 +1,13 @@
+language: python
+python:
+  - "2.7"
+  # PyPy versions
+# command to install dependencies
+install:
+  #- pip install .
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - "python server.py &"
+  - "sleep 5"
+  - "curl -X GET http://127.0.0.1:5000/tc/api/v1.0/tclist | grep tc_10.9.3.14_10.9.3.27_27017"
