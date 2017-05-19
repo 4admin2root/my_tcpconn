@@ -14,6 +14,7 @@ links:
 :copyright: 4admin2root
 :license: BSD 3-Clause License
 """
+
 import requests
 import json
 from config import SERVER_HOST
@@ -24,19 +25,19 @@ import logging
 import logging.config
 from requests import RequestException
 import psutil
+#from apscheduler.schedulers.background import BackgroundScheduler
+import time
+
 
 __title__ = 'client'
 __version__ = '0.0.1'
 __author__ = 'adminroot'
 __license__ = 'BSD 3-Clause License'
 
-
-
 #todo
 # daemon and windows service
-# logging
-# logging config file
 #
+
 lports = []  # listen ports
 ltor = []    # local to remote links
 rtol = []    # remote to local links
@@ -70,19 +71,25 @@ def getlist():
                 rtol.append('tc' + '_' + i.raddr[0] + '_' + i.laddr[0] + '_' + str(i.laddr[1]))
             elif i.raddr[0] != SERVER_HOST and i.raddr[1] != SERVER_PORT:
                 ltor.append('tc' + '_' + i.laddr[0] + '_' + i.raddr[0] + '_' + str(i.raddr[1]))
-
-
-if __name__ == '__main__':
+def run():
     """getlist and post to server"""
     logging.config.fileConfig('logging.conf')
-    logger = logging.getLogger('example02')
+    logging.getLogger('example02')
     getlist()
     ltor_counter = Counter(ltor)
+    logging.debug('ltor:' + str(ltor_counter))
     rtol_counter = Counter(rtol)
+    logging.debug('rtol:' + str(rtol_counter))
     logging.debug('start to post data to server')
     postdata(ltor_counter)
     postdata(rtol_counter)
-    logging.info('finished')
+
+
+if __name__ == '__main__':
+    while True:
+        run()
+        time.sleep(INTERVAL)
+
 
 
 

@@ -14,7 +14,7 @@ script:
   - "sed -i '/SERVER_HOST/d' config.py && echo -e \"SERVER_HOST = 'localhost'\" >> config.py"
   - "python server.py &"
   - "sleep 5"
-  - "python client.py"
+  - "python client.py &"
   - "cat logs/my_tcpconn.log"
   - "curl -H \"Content-type: application/json\" -X POST -d '{\"tcp_conn_key\": \"tc_10.9.3.14_10.9.3.27_27017\", \"tcp_conn_value\": 100, \"tcp_conn_interval\": 60}' http://localhost:5000/tc/api/v1.0/tclist"
   - "curl -X GET http://localhost:5000/tc/api/v1.0/tclist "

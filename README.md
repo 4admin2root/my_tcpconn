@@ -9,6 +9,7 @@
 * ansible deploy
 
 ##server config
+* install and start redis first
 * test for nginx
 ```
 pip install uwsgi
@@ -35,3 +36,12 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
  ```
  ##client install
  /ansible/README.md
+ 
+ ##view topo.html
+ 
+browser http://{{SERVER_HOST}}:5000/topo.html
+the graph is using [netjsongraph](https://github.com/netjson/netjsongraph.js)
+
+![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo.png)
+
+
