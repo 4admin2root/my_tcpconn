@@ -72,6 +72,7 @@ def getlist():
 
 
 if __name__ == '__main__':
+    """getlist and post to server"""
     logging.config.fileConfig('logging.conf')
     logger = logging.getLogger('example02')
     getlist()
