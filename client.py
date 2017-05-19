@@ -60,6 +60,7 @@ def postdata(cr):
 def getlist():
     """ get tcp4 network links """
     tcs = psutil.net_connections('tcp4')
+    logging.debug('Get tcp4 connections :' + str(tcs))
     for i in tcs:
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
             lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
