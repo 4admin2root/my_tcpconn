@@ -1,12 +1,7 @@
 [![Build Status](https://travis-ci.org/4admin2root/my_tcpconn.svg?branch=master)](https://travis-ci.org/4admin2root/my_tcpconn)
 # my_tcpconn
 ## a tool for show tcp connection topology
-### todo
-* init
-* daemon
-* dockerfile
-* travis
-* ansible deploy
+
 
 ##server config
 * install and start redis first
@@ -34,8 +29,11 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
   --error-logfile /tmp/error.log server:app
 
  ```
+ 
  ##client install
+ 
  /ansible/README.md
+ you can also run it in windows
  
  ##view topo.html
  
