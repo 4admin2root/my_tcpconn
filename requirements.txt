@@ -5,3 +5,4 @@ Flask-HTTPAuth==3.2.2
 requests==2.14.2
 psutil==5.2.2
 python-daemon==2.1.2
+numpy==1.12.1

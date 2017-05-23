@@ -17,7 +17,8 @@ links:
 from flask import Flask, render_template
 from flask_restful import Api, Resource, reqparse, fields
 import json
-
+from numpy import matrix
+from numpy import zeros
 import redis
 from config import REDIS_HOST
 from config import REDIS_PORT
@@ -77,6 +78,9 @@ def hello_world():
 def netjson():
     return render_template('topo.html')
 
+@app.route('/chord.html')
+def getchord():
+    return render_template('chord.html')
 
 @app.route('/getjson')
 def getjson():
@@ -101,8 +105,33 @@ def getjson():
     return json.dumps(d_netjson)
 
 
+@app.route('/getmatrix')
+def getmatrix():
+    tcl = TcpConnListAPI().get()['tcp_conn_list']
+    nodes = []
+    for i in tcl:
+        link = i.split('_')
+        l1 = link[1]
+        l2 = link[2]
+        if l1 not in nodes:
+            nodes.append(l1)
+        if l2 not in nodes:
+            nodes.append(l2)
+    tcl_conn_matrix = zeros((len(nodes), len(nodes)))
+    for t in tcl:
+        l = t.split('_')
+        x = nodes.index(l[1])
+        y = nodes.index(l[2])
+        n = l[3]
+        tcl_conn_matrix[x, y] = n
+    d_matrix = {'nodes': nodes, 'tcl_conn_matrix': tcl_conn_matrix.tolist() }
+    return json.dumps(d_matrix)
+
+
+
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
 
 if __name__ == '__main__':
     """run server"""
     app.run(host='0.0.0.0')
+
