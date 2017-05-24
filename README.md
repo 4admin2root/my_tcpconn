@@ -35,10 +35,9 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
  /ansible/README.md
  you can also run it in windows
  
- ##view topo.html and chord.html
+ ##view topo.html
  
 browser http://{{SERVER_HOST}}:5000/topo.html
-browser http://{{SERVER_HOST}}:5000/chord.html
 the graph is using [netjsongraph](https://github.com/netjson/netjsongraph.js)
 
 ![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo.png)
