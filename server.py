@@ -84,7 +84,6 @@ def getchord():
 
 @app.route('/getjson')
 def getjson():
-    # pass  # todo : return formatted json data
     tcl = TcpConnListAPI().get()['tcp_conn_list']
     d_netjson = {'type': 'test', 'label': 'test', 'protocol': 'tcp', 'version': '0.0.1', 'metric': 'test', 'nodes': [], 'links': [] }
     nodes = []  # netjsongraph node list
@@ -126,7 +125,6 @@ def getmatrix():
         tcl_conn_matrix[x, y] = n
     d_matrix = {'nodes': nodes, 'tcl_conn_matrix': tcl_conn_matrix.tolist() }
     return json.dumps(d_matrix)
-
 
 
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
