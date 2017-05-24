@@ -63,6 +63,23 @@ class TcpConnListAPI(Resource):
         tclist = self.r.keys('tc*')
         return {'tcp_conn_list': tclist}
 
+    def getval(self):
+        """get redis key and val"""
+        pipe = self.r.pipeline()
+        pipe_size = 10000
+        keys = self.r.keys('tc*')
+        vals = []
+        p_len = 0  # for record pipe execute in loop
+        for key in keys:
+            pipe.get(key)
+            if p_len < pipe_size:
+                p_len += 1
+            else:
+                vals.extend(pipe.execute())
+        vals.extend(pipe.execute())
+        return {'tcp_conn_list': keys, 'tcp_conn_value': vals}
+
+
     def post(self):
         """ post method """
         args = self.reqparse.parse_args()
@@ -107,7 +124,10 @@ def getjson():
 
 @app.route('/getmatrix')
 def getmatrix():
-    tcl = TcpConnListAPI().get()['tcp_conn_list']
+    tca = TcpConnListAPI()
+    tc = tca.getval()
+    tcl = tc['tcp_conn_list']
+    tcv = tc['tcp_conn_value']
     nodes = []
     for i in tcl:
         link = i.split('_')
@@ -122,7 +142,7 @@ def getmatrix():
         l = t.split('_')
         x = nodes.index(l[1])
         y = nodes.index(l[2])
-        n = l[3]
+        n = tcv[tcl.index(t)]
         tcl_conn_matrix[x, y] = n
     d_matrix = {'nodes': nodes, 'tcl_conn_matrix': tcl_conn_matrix.tolist() }
     return json.dumps(d_matrix)

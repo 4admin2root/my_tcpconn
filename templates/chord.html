@@ -73,8 +73,9 @@
 				.attr("transform", function(d){
 					return "rotate(" + ( d.angle * 180 / Math.PI ) + ")" +
 						   "translate(0,"+ -1.0*(outerRadius+10) +")" +
-{#						    ( ( d.angle > Math.PI*3/4 && d.angle < Math.PI*5/4 ) ? "rotate(180)" : "");#}
-                            "rotate(90)";
+						    ( ( d.angle > Math.PI*3/4 && d.angle < Math.PI*5/4 ) ? "rotate(180)" : "");
+{#                            "rotate(90)" + "translateY(50%)";#}
+{#                            "rotate(90)" ;#}
 				})
 				.text(function(d){
 					return d.name;
