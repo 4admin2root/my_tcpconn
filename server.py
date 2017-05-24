@@ -45,7 +45,7 @@ class TcpConnListAPI(Resource):
     """restful api"""
     def __init__(self):
         """init redis connection and reqparse"""
-        self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT)
+        self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT, socket_timeout=5)
         self.r = redis.Redis(connection_pool=self.pool)
         self.ex = INTERVAL  # expire time s
         self.reqparse = reqparse.RequestParser()
@@ -82,9 +82,6 @@ def netjson():
 def getchord():
     return render_template('chord.html')
 
-@app.route('/favicon.ico')
-def getfavicon():
-    return redirect('static/favicon.ico')
 
 @app.route('/getjson')
 def getjson():
