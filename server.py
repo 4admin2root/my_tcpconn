@@ -14,7 +14,7 @@ links:
 :license: BSD 3-Clause License
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_restful import Api, Resource, reqparse, fields
 import json
 from numpy import matrix
@@ -81,6 +81,10 @@ def netjson():
 @app.route('/chord.html')
 def getchord():
     return render_template('chord.html')
+
+@app.route('/favicon.ico')
+def getfavicon():
+    return redirect('static/favicon.ico')
 
 @app.route('/getjson')
 def getjson():
