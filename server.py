@@ -14,10 +14,9 @@ links:
 :license: BSD 3-Clause License
 """
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template
 from flask_restful import Api, Resource, reqparse, fields
 import json
-from numpy import matrix
 from numpy import zeros
 import redis
 from config import REDIS_HOST

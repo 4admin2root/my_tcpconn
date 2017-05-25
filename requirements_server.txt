@@ -1,0 +1,6 @@
+Flask==0.12.1
+Redis==2.10.5
+Flask-RESTful==0.3.5
+Flask-HTTPAuth==3.2.2
+numpy==1.12.1
+gunicorn==19.7.1
