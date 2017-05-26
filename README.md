@@ -29,7 +29,10 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
   --error-logfile /tmp/error.log server:app
 
  ```
- 
+ * docker 
+```text
+docker run 4admin2root/my_tcpconn
+```
  ### client install
  
  linux : /ansible/README.md
