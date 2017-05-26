@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bar</title>
+    <link href="static/favicon.ico" rel="bookmark" type="image/x-icon" />
+    <link href="static/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="static/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+<div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        $.ajaxSettings.async = false;
+        var bar2 = $.getJSON('/getbar2');
+        var barjson = JSON.parse(bar2.responseText);
+        var category = new Array();
+        var l2r = new Array();
+        var r2l = new Array();
+        var j = 0;
+        for (var i in barjson){
+            category[j] = i;
+            l2r[j] = barjson[i].l2r;
+            r2l[j] = barjson[i].r2l;
+            j++;
+        }
+        console.log(bar2);
+            option = {
+            title : {
+                text: 'tcp connection',
+                subtext: 'l2r and r2l'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['local to remote','remote to local']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : []
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'l2r',
+                    type:'bar',
+                    data:[],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'r2l',
+                    type:'bar',
+                    data:[],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name : '平均值'}
+                        ]
+                    }
+                }
+            ]
+        };
+    option.xAxis[0].data = category;
+    option.series[0].data = l2r;
+    option.series[1].data = r2l;
+    myChart.setOption(option);
+    </script>
+
+</body>
+</html>

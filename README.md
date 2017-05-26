@@ -43,9 +43,15 @@ http://{{SERVER_HOST}}:5000/topo.html
 
 http://{{SERVER_HOST}}:5000/chord.html
 
-the graph is using [netjsongraph](https://github.com/netjson/netjsongraph.js)
+http://{{SERVER_HOST}}:5000/bar.html
+
+the graph is using 
+[netjsongraph](https://github.com/netjson/netjsongraph.js)
+[d3.js](https://d3js.org/)
+[echarts](http://echarts.baidu.com/)
 
 ![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo.png)
 ![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo2.png)
+![](https://github.com/4admin2root/my_tcpconn/blob/master/test/bar.png)
 
 

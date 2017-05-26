@@ -98,6 +98,10 @@ def netjson():
 def getchord():
     return render_template('chord.html')
 
+@app.route('/bar.html')
+def getbar():
+    return render_template('bar.html')
+
 
 @app.route('/getjson')
 def getjson():
@@ -141,10 +145,38 @@ def getmatrix():
         l = t.split('_')
         x = nodes.index(l[1])
         y = nodes.index(l[2])
-        n = tcv[tcl.index(t)]
-        tcl_conn_matrix[x, y] = n
+        n = int(tcv[tcl.index(t)])
+        tcl_conn_matrix[x, y] += n
     d_matrix = {'nodes': nodes, 'tcl_conn_matrix': tcl_conn_matrix.tolist() }
     return json.dumps(d_matrix)
+
+
+@app.route('/getbar2')
+def getbar2():
+    tca = TcpConnListAPI()
+    tc = tca.getval()
+    tcl = tc['tcp_conn_list']
+    tcv = tc['tcp_conn_value']
+    nodes = []
+    lrs = {}
+    for i in tcl:
+        link = i.split('_')
+        l1 = link[1]
+        l2 = link[2]
+        if l1 not in nodes:
+            nodes.append(l1)
+        if l2 not in nodes:
+            nodes.append(l2)
+        n = int(tcv[tcl.index(i)])
+        if l1 in lrs:
+            lrs[l1]['l2r'] += n
+        else:
+            lrs[l1] = {'l2r': n, 'r2l': 0}
+        if l2 in lrs:
+            lrs[l2]['r2l'] += n
+        else:
+            lrs[l2] = {'l2r': 0, 'r2l': n}
+    return json.dumps(lrs)
 
 
 api.add_resource(TcpConnListAPI, '/tc/api/v1.0/tclist', endpoint='tclist')
