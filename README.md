@@ -3,7 +3,7 @@
 ## a tool for show tcp connection topology
 
 
-##server config
+### server config
 * install and start redis first
 * test for nginx
 ```
@@ -30,12 +30,12 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
 
  ```
  
- ##client install
+ ### client install
  
  /ansible/README.md
  you can also run it in windows
  
- ##view topo.html ant chord.html
+ ### view topo.html ant chord.html
  
 browser
  
