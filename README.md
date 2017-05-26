@@ -32,8 +32,9 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
  
  ### client install
  
- /ansible/README.md
- you can also run it in windows
+ linux : /ansible/README.md
+ 
+ you can also run it in windows but without ansible playbook
  
  ### view topo.html ant chord.html
  
