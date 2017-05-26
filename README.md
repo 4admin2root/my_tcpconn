@@ -31,7 +31,7 @@ gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
  ```
  * docker 
 ```text
-docker run 4admin2root/my_tcpconn
+docker-compose up --build
 ```
  ### client install
  
