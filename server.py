@@ -87,7 +87,7 @@ class TcpConnListAPI(Resource):
 
 @app.route('/')
 def hello_world():
-    return 'xxx'
+    return render_template('index.html')
 
 
 @app.route('/topo.html')

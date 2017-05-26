@@ -51,8 +51,8 @@ the graph is using
 [d3.js](https://d3js.org/)
 [echarts](http://echarts.baidu.com/)
 
-![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo.png)
-![](https://github.com/4admin2root/my_tcpconn/blob/master/test/demo2.png)
-![](https://github.com/4admin2root/my_tcpconn/blob/master/test/bar.png)
+![](https://github.com/4admin2root/my_tcpconn/raw/master/test/demo.png)
+![](https://github.com/4admin2root/my_tcpconn/raw/master/test/demo2.png)
+![](https://github.com/4admin2root/my_tcpconn/raw/master/test/bar.png)
 
 
