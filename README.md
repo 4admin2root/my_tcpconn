@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/4admin2root/my_tcpconn.svg?branch=master)](https://travis-ci.org/4admin2root/my_tcpconn)
+[![Docs Build Status](https://readthedocs.org/projects/my-tcpconn/badge/?version=latest)](http://my-tcpconn.readthedocs.io/)
 # my_tcpconn
 ## a tool for show tcp connection topology
 
