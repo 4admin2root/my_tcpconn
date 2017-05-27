@@ -16,11 +16,15 @@ pipe = conn.pipeline()
 if __name__ == '__main__':
 
     while i < 100:
-        ip = 'tc' + str(random.randint(192,255)) + '.' + \
+        ip = 'tc' + '_' + str(random.randint(192,255)) + '.' + \
               str(random.randint(168,255)) + '.' + \
               str(random.randint(0,255)) + '.' + \
               str(random.randint(0,255)) + '_' + \
-              str(random.randint(1024,65535))
+             str(random.randint(192, 255)) + '.' + \
+             str(random.randint(168, 255)) + '.' + \
+             str(random.randint(0, 255)) + '.' + \
+             str(random.randint(0, 255)) + '_' + \
+             str(random.randint(1024,65535))
         num = random.randint(1024,65535)
         pipe.set(ip,num,INTERVAL)
         i +=1

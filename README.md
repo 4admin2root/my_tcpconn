@@ -5,7 +5,8 @@
 
 ### server config
 * install and start redis first
-* test for nginx
+
+* for nginx
 ```
 pip install uwsgi
 uwsgi -s /run/uwsgi.sock -w server:app
@@ -22,14 +23,14 @@ uwsgi -s /run/uwsgi.sock -w server:app
 #   }
  ```
 
- * test for gunicorn
+ * for gunicorn
  ```
  pip install gunicorn
 gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
   --error-logfile /tmp/error.log server:app
 
  ```
- * docker 
+ * for docker 
 ```text
 docker-compose up --build
 ```
