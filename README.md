@@ -2,7 +2,10 @@
 [![Docs Build Status](https://readthedocs.org/projects/my-tcpconn/badge/?version=latest)](http://my-tcpconn.readthedocs.io/)
 # my_tcpconn
 ## a tool for show tcp connection topology
-
+todo:
+docs
+bootstrap
+swagger
 
 ### server config
 * install and start redis first
