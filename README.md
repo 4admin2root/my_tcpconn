@@ -6,6 +6,7 @@ todo:
 docs
 bootstrap
 swagger
+codeclimate
 
 ### server config
 * install and start redis first
