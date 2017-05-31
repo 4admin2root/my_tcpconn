@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/4admin2root/my_tcpconn.svg?branch=master)](https://travis-ci.org/4admin2root/my_tcpconn)
 [![Docs Build Status](https://readthedocs.org/projects/my-tcpconn/badge/?version=latest)](http://my-tcpconn.readthedocs.io/)
+[![Code Climate][codeclimate-badge]][codeclimate-url]
 # my_tcpconn
 ## a tool for show tcp connection topology
 todo:
@@ -65,3 +66,5 @@ the graph is using
 ![](https://github.com/4admin2root/my_tcpconn/raw/master/test/bar.png)
 
 
+[codeclimate-badge]: https://codeclimate.com/github/4admin2root/my_tcpconn/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/4admin2root/my_tcpconn
