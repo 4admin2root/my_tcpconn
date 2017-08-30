@@ -30,8 +30,8 @@ script:
   - "curl -X GET http://localhost:5000/tc/api/v1.0/tclist"
   - "curl -X GET http://localhost:5000/tc/api/v1.0/topo.html"
   - "curl -X GET http://localhost:5000/tc/api/v1.0/chord.html"
-  - "curl -X GET http://localhost:5000/tc/api/v1.0/bar.html"
-  - "curl -X GET http://localhost:5000/"
+  - "curl -X GET -s http://localhost:5000/tc/api/v1.0/bar.html"
+  - "curl -X GET -s http://localhost:5000/"
   - sonar-scanner
 
 cache:
