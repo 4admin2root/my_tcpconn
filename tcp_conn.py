@@ -24,4 +24,4 @@ class TcpConn(object):
 
 if __name__ == '__main__':
     tc = TcpConn()
-    print len(tc.getlist())
+    print(len(tc.getlist()))

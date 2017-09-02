@@ -25,7 +25,6 @@ import logging
 import logging.config
 from requests import RequestException
 import psutil
-#from apscheduler.schedulers.background import BackgroundScheduler
 import time
 
 
@@ -45,7 +44,7 @@ rtol = []    # remote to local links
 
 def postdata(cr):
     """post links to http server"""
-    url = url = 'http://' + SERVER_HOST + ':' + str(SERVER_PORT) + '/tc/api/v1.0/tclist'
+    url = 'http://' + SERVER_HOST + ':' + str(SERVER_PORT) + '/tc/api/v1.0/tclist'
     headers = {'content-type': 'application/json'}
     for i in cr:
         payload = {'tcp_conn_key': i, 'tcp_conn_value': cr[i], 'tcp_conn_interval': INTERVAL}
