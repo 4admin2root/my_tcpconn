@@ -32,8 +32,13 @@ script:
   - "curl -H \"Content-type: application/json\" -X POST -d '{\"tcp_conn_key\": \"tc_10.9.3.14_10.9.3.27_27017\", \"tcp_conn_value\": 100, \"tcp_conn_interval\": 60}' http://localhost:5000/tc/api/v1.0/tclist"
   - "curl -X GET -s http://localhost:5000/tc/api/v1.0/bar.html"
   - "curl -X GET -s -o /dev/null http://localhost:5000/"
-  - "sonar-scanner"
-
+  - "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=4admin2root-github"
+# sonar-scanner \
+#     -Dsonar.projectKey=your_project_key_that_must_be_unique \
+#         -Dsonar.sources=. \
+#             -Dsonar.host.url=https://sonarcloud.io \
+#                 -Dsonar.organization=your_organization_key \
+#                     -Dsonar.login=abcdef0123456789
 cache:
   directories:
     - '$HOME/.sonar/cache'
