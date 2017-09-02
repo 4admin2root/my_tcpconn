@@ -32,7 +32,7 @@ script:
   - "curl -X GET -s http://localhost:5000/tc/api/v1.0/bar.html"
   - "curl -X GET -s -o /dev/null http://localhost:5000/"
   #- "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=4admin2root-github -X"
-  - "sonar-scanner"
+  - "sonar-scanner -v"
 # total_hours_wasted_here = 3
 # errors:
 #ERROR: Error during SonarQube Scanner execution
