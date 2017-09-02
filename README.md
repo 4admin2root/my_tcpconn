@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/4admin2root/my_tcpconn.svg?branch=master)](https://travis-ci.org/4admin2root/my_tcpconn)
 [![Docs Build Status](https://readthedocs.org/projects/my-tcpconn/badge/?version=latest)](http://my-tcpconn.readthedocs.io/)
 [![Code Climate][codeclimate-badge]][codeclimate-url]
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=my_tcpconn)](https://sonarcloud.io/dashboard/index/my_tcpconn)
 # my_tcpconn
 ## a tool for show tcp connection topology
 todo:
