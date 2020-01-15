@@ -3,5 +3,5 @@
   remote_user: root
   gather_facts: no
   tasks:
-  - name: run a test
-    shell: cd /opt/my_tcpconn/; nohup python3 client.py &
+  - name: kill python3 client.py
+    shell: "ps -ef |grep  'python3 client.py' |grep -v grep |awk '{print $2}' |xargs kill"

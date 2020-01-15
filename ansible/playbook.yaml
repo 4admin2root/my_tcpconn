@@ -6,9 +6,9 @@
   remote_user: root
   gather_facts: no
   tasks:
-  - name: ensure python3-pip python3-devel gcc is present
+  - name: ensure pkgs are present
     yum: 
-      name: ['python3-pip', 'python3-devel', 'gcc']
+      name: ['python3-pip', 'python3-devel', 'gcc', 'git']
 
   - name: git clone
     git: 
@@ -18,10 +18,13 @@
       force: true
 
   - name: install pip requirements
-    pip: 
-      requirements: /opt/my_tcpconn/requirements_client.txt
-      extra_args: '-i https://mirrors.aliyun.com/pypi/simple/'
-      executable: pip3
+    shell: 'pip3 install requests -i https://mirrors.aliyun.com/pypi/simple/ && pip3 install psutil -i https://mirrors.aliyun.com/pypi/simple/'
+    # there is in bug in ansible pip, executable not work
+    #pip: 
+    #  #requirements: /opt/my_tcpconn/requirements_client.txt
+    #  name: ['request','psutil']
+    #  extra_args: '-i https://mirrors.aliyun.com/pypi/simple/'
+    #  executable: pip3
 
   - name: change config file
     shell: sed -i '/SERVER/d' /opt/my_tcpconn/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn/config.py
