@@ -1,4 +1,4 @@
 [my_tcpconn]
-yyy-testenv-vm-web-01
-172.20.12.48
-172.20.12.72
+yyy-testenv-vm-web-01 ansible_python_interpreter=/usr/bin/python3
+172.20.12.48 ansible_python_interpreter=/bin/python3
+172.20.12.72 ansible_python_interpreter=/usr/bin/python3

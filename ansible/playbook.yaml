@@ -6,7 +6,7 @@
   remote_user: root
   gather_facts: no
   tasks:
-  - name: ensure python-pip python-devel unzip is present
+  - name: ensure python3-pip python3-devel gcc is present
     yum: 
       name: ['python3-pip', 'python3-devel', 'gcc']
 
@@ -15,12 +15,13 @@
       repo: 'https://github.com/4admin2root/my_tcpconn.git'
       dest: /opt/my_tcpconn
       version: python3
+      force: true
 
-  - name: install psutil
+  - name: install pip requirements
     pip: 
       requirements: /opt/my_tcpconn/requirements_client.txt
       extra_args: '-i https://mirrors.aliyun.com/pypi/simple/'
-      executable: pip3
+      #executable: pip3
 
   - name: change config file
     shell: sed -i '/SERVER/d' /opt/my_tcpconn/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn/config.py
