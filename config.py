@@ -21,7 +21,7 @@ __author__ = 'adminroot'
 __license__ = 'BSD 3-Clause License'
 
 
-REDIS_HOST = '10.9.100.18'
+REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 INTERVAL = 30
 SERVER_HOST = '10.9.5.11'

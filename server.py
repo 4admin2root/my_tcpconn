@@ -110,7 +110,7 @@ def getjson():
     nodes = []  # netjsongraph node list
     links = []  # netjsongraph link list
     for i in tcl:
-        link = i.split('_')
+        link = i.decode().split('_')
         l1 = {'id': link[1]}
         l2 = {'id': link[2]}
         if l1 not in nodes:
@@ -133,7 +133,7 @@ def getmatrix():
     tcv = tc['tcp_conn_value']
     nodes = []
     for i in tcl:
-        link = i.split('_')
+        link = i.decode().split('_')
         l1 = link[1]
         l2 = link[2]
         if l1 not in nodes:
@@ -142,7 +142,7 @@ def getmatrix():
             nodes.append(l2)
     tcl_conn_matrix = zeros((len(nodes), len(nodes)))
     for t in tcl:
-        l = t.split('_')
+        l = t.decode().split('_')
         x = nodes.index(l[1])
         y = nodes.index(l[2])
         n = int(tcv[tcl.index(t)])
@@ -160,7 +160,7 @@ def getbar2():
     nodes = []
     lrs = {}
     for i in tcl:
-        link = i.split('_')
+        link = i.decode().split('_')
         l1 = link[1]
         l2 = link[2]
         if l1 not in nodes:

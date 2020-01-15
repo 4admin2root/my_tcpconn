@@ -21,7 +21,7 @@
     pip: 
       requirements: /opt/my_tcpconn/requirements_client.txt
       extra_args: '-i https://mirrors.aliyun.com/pypi/simple/'
-      #executable: pip3
+      executable: pip3
 
   - name: change config file
     shell: sed -i '/SERVER/d' /opt/my_tcpconn/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn/config.py
