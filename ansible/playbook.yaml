@@ -18,7 +18,7 @@
 
   - name: install psutil
     pip: 
-      name: psutil 
+      requirements: /opt/my_tcpconn/requirements_client.txt
       extra_args: '-i https://mirrors.aliyun.com/pypi/simple/'
       executable: pip3
 
