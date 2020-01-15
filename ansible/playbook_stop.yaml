@@ -1,0 +1,7 @@
+---
+- hosts: my_tcpconn
+  remote_user: root
+  gather_facts: no
+  tasks:
+  - name: run a test
+    shell: cd /opt/my_tcpconn/; nohup python3 client.py &

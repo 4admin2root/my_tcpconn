@@ -13,9 +13,11 @@ codeclimate
 ### server config
 * install and start redis first
 
+warning:  For Security Reasons, just listen on 127.0.0.1
+
 * for nginx
 ```
-pip install uwsgi
+pip3 install uwsgi
 uwsgi -s /run/uwsgi.sock -w server:app
 #   #nginx config file block
 #     server {
@@ -32,8 +34,8 @@ uwsgi -s /run/uwsgi.sock -w server:app
 
  * for gunicorn
  ```
- pip install gunicorn
-gunicorn -D -w 4 -b 10.9.5.11:5000 --access-logfile /tmp/access.log \
+ pip3 install gunicorn
+gunicorn -D -w 4 -b 0.0.0.0:5000 --access-logfile /tmp/access.log \
   --error-logfile /tmp/error.log server:app
 
  ```
