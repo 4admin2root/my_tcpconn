@@ -2,13 +2,13 @@
 - hosts: my_tcpconn
   vars:
     server_port: 5000
-    server_host: 172.20.12.106
+    server_host: 172.20.12.72
   remote_user: root
   gather_facts: no
   tasks:
   - name: ensure pkgs are present
     yum: 
-      name: ['python3-pip', 'python3-devel', 'git']
+      name: ['python3-pip', 'python3-devel', 'git', 'gcc']
 
   - name: git clone
     git: 
@@ -29,7 +29,7 @@
   - name: change config file
     shell: sed -i '/SERVER/d' /opt/my_tcpconn/config.py && echo -e "SERVER_HOST = '{{server_host}}'\nSERVER_PORT = {{server_port}}" >> /opt/my_tcpconn/config.py
 
-  - name: run a test
+  - name: run client.py
     shell: cd /opt/my_tcpconn/; nohup python3 client.py &
     tags:
       - test
