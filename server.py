@@ -21,6 +21,7 @@ from numpy import zeros
 import redis
 from config import REDIS_HOST
 from config import REDIS_PORT
+from config import REDIS_PWD
 from config import INTERVAL
 
 __title__ = 'server'
@@ -44,7 +45,7 @@ class TcpConnListAPI(Resource):
     """restful api"""
     def __init__(self):
         """init redis connection and reqparse"""
-        self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT, socket_timeout=5)
+        self.pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PWD, socket_timeout=5)
         self.r = redis.Redis(connection_pool=self.pool)
         self.ex = INTERVAL  # expire time s
         self.reqparse = reqparse.RequestParser()

@@ -23,6 +23,7 @@ __license__ = 'BSD 3-Clause License'
 
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
+REDIS_PWD = 'MyPassw0rd'
 INTERVAL = 30
 SERVER_HOST = '10.9.5.11'
 SERVER_PORT = 5000
