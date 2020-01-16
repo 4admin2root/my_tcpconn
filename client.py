@@ -54,7 +54,8 @@ def postdata(cr):
             logging.error("Post data failed: {0}".format(re))
             logging.debug('SERVER_HOST:' + SERVER_HOST)
             logging.debug('SERVER_PORT:' + str(SERVER_PORT))
-            exit(1)
+            # exit when post failed
+            # exit(1) 
 
 
 def getlist():
