@@ -80,7 +80,7 @@ def run():
     """getlist and post to server"""
     getlist()
     ltor_counter = Counter(ltor)
-    logging.debug('ltor:' + str(ltor_counter))
+    logger.debug('ltor:' + str(ltor_counter))
     rtol_counter = Counter(rtol)
     logger.debug('rtol:' + str(rtol_counter))
     logger.debug('start to post data to server')
