@@ -26,7 +26,7 @@ import logging.config
 from requests import RequestException
 import psutil
 import time
-
+import json
 
 __title__ = 'client'
 __version__ = '0.0.1'
@@ -76,8 +76,9 @@ def getlist():
 
 def run():
     """getlist and post to server"""
-    logging.config.fileConfig('logging.conf')
-    logging.getLogger('example02')
+    logging_config = json.load(open('logging.json', 'r'))
+    logging.config.dictConfig(logging_config)
+    logging.getLogger('mylogger')
     getlist()
     ltor_counter = Counter(ltor)
     logging.debug('ltor:' + str(ltor_counter))
