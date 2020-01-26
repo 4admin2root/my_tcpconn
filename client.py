@@ -40,7 +40,9 @@ __license__ = 'BSD 3-Clause License'
 lports = []  # listen ports
 ltor = []    # local to remote links
 rtol = []    # remote to local links
-
+logging_config = json.load(open('logging.json', 'r'))
+logging.config.dictConfig(logging_config)
+logger = logging.getLogger('mylogger')
 
 def postdata(cr):
     """post links to http server"""
@@ -51,9 +53,9 @@ def postdata(cr):
         try:
             requests.post(url, data=json.dumps(payload), headers=headers, timeout=3)  # todo :  bad perf
         except RequestException as re:
-            logging.error("Post data failed: {0}".format(re))
-            logging.debug('SERVER_HOST:' + SERVER_HOST)
-            logging.debug('SERVER_PORT:' + str(SERVER_PORT))
+            logger.error("Post data failed: {0}".format(re))
+            logger.debug('SERVER_HOST:' + SERVER_HOST)
+            logger.debug('SERVER_PORT:' + str(SERVER_PORT))
             # exit when post failed
             # exit(1) 
 
@@ -61,7 +63,7 @@ def postdata(cr):
 def getlist():
     """ get tcp4 network links """
     tcs = psutil.net_connections('tcp4')
-    logging.debug('Get tcp4 connections :' + str(tcs))
+    logger.debug('Get tcp4 connections :' + str(tcs))
     for i in tcs:
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
             lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
@@ -76,15 +78,12 @@ def getlist():
 
 def run():
     """getlist and post to server"""
-    logging_config = json.load(open('logging.json', 'r'))
-    logging.config.dictConfig(logging_config)
-    logging.getLogger('mylogger')
     getlist()
     ltor_counter = Counter(ltor)
     logging.debug('ltor:' + str(ltor_counter))
     rtol_counter = Counter(rtol)
-    logging.debug('rtol:' + str(rtol_counter))
-    logging.debug('start to post data to server')
+    logger.debug('rtol:' + str(rtol_counter))
+    logger.debug('start to post data to server')
     postdata(ltor_counter)
     postdata(rtol_counter)
 
