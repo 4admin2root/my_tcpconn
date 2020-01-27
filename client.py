@@ -61,8 +61,8 @@ def postdata(cr):
 
 
 def getlist():
-    """ get tcp4 network links """
-    tcs = psutil.net_connections('tcp4')
+    """ get tcp network links """
+    tcs = psutil.net_connections('tcp')
     logger.debug('Get tcp4 connections :' + str(tcs))
     for i in tcs:
         if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
@@ -75,6 +75,12 @@ def getlist():
             else:
                 ltor.append('tc' + '_' + i.laddr[0] + '_' + i.raddr[0] + '_' + str(i.raddr[1]))
 
+def cleanlist():
+    """ clean tcp data """
+    lports = []  # listen ports
+    ltor = []    # local to remote links
+    rtol = []    # remote to local links
+
 
 def run():
     """getlist and post to server"""
@@ -86,6 +92,7 @@ def run():
     logger.debug('start to post data to server')
     postdata(ltor_counter)
     postdata(rtol_counter)
+    cleanlist()
 
 
 if __name__ == '__main__':
