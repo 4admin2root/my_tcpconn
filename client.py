@@ -63,23 +63,24 @@ def postdata(cr):
 def getlist():
     """ get tcp network links """
     tcs = psutil.net_connections('tcp')
-    logger.debug('Get tcp4 connections :' + str(tcs))
+    logger.debug('Get tcp connections :' + str(tcs))
     for i in tcs:
-        if i.status == 'LISTEN' and i.laddr[0] != '127.0.0.1':
-            lports.append(i.laddr[1])  # todo : how to handle same port and diff nic, how to specify nic
+        if i.status == 'LISTEN' and i.laddr.ip != '127.0.0.1':
+            lports.append(i.laddr.port)  # todo : how to handle same port and diff nic, how to specify nic
     for i in tcs:
-        if i.status == 'ESTABLISHED' and i.laddr[0] != '127.0.0.1':
-            if i.laddr[1] in lports:
-                rtol.append('tc' + '_' + i.raddr[0] + '_' + i.laddr[0] + '_' + str(i.laddr[1]))
+        if i.status == 'ESTABLISHED' and i.laddr.ip != '127.0.0.1':
+            if i.laddr.port in lports:
+                rtol.append('tc' + '_' + i.raddr.ip.lstrip('::ffff:') + '_' + i.laddr.ip.lstrip('::ffff:') + '_' + str(i.laddr.port))
             # elif i.raddr[0] != SERVER_HOST and i.raddr[1] != SERVER_PORT:
             else:
-                ltor.append('tc' + '_' + i.laddr[0] + '_' + i.raddr[0] + '_' + str(i.raddr[1]))
+                ltor.append('tc' + '_' + i.laddr.ip.lstrip('::ffff:') + '_' + i.raddr.ip.lstrip('::ffff:') + '_' + str(i.raddr.port))
 
-def cleanlist():
+
+def clearlist():
     """ clean tcp data """
-    lports = []  # listen ports
-    ltor = []    # local to remote links
-    rtol = []    # remote to local links
+    lports.clear()
+    ltor.clear()
+    rtol.clear()
 
 
 def run():
@@ -92,7 +93,7 @@ def run():
     logger.debug('start to post data to server')
     postdata(ltor_counter)
     postdata(rtol_counter)
-    cleanlist()
+    clearlist()
 
 
 if __name__ == '__main__':
